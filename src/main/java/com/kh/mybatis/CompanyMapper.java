@@ -11,9 +11,17 @@ public interface CompanyMapper {
     int insert(@Param("company") Company company);
 
     @Select("SELECT * FROM company")
-    @Results(id="CompanyMap", value={
+//    @Results(id="CompanyMap", value={
+//            @Result(property = "name", column = "company_name"),
+//            @Result(property = "address", column = "company_address")
+//    })
+    @Results(id="CompanyMap",value = {
+            @Result(property = "id", column = "id"),
             @Result(property = "name", column = "company_name"),
-            @Result(property = "address", column = "company_address")
+            @Result(property = "address", column = "company_address"),
+            @Result(property = "employeeList", column = "id", many=@Many(
+                    select = "com.kh.mybatis.EmployeeMapper.getByCompanyId"
+            ))//many 다대일 관계 매핑 id에 해당하는 사원의 리스트ㅡㄹ 가져옴
     })
     List<Company> getAll();
 

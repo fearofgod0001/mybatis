@@ -11,6 +11,7 @@ public interface EmployeeMapper {
     int insert(@Param("employee") Employee employee);
     @Select("SELECT * FROM employee")
     @Results(id="EmployeeMap", value={
+            @Result(property = "companyId", column = "company_id"),
             @Result(property = "name", column = "employee_name"),
             @Result(property = "address", column = "employee_address")
     })
@@ -21,6 +22,6 @@ public interface EmployeeMapper {
     Employee getById(@Param("id") int id);
 
     @Select("SELECT * FROM employee WHERE company_id=#{companyId}")
-    @ResultMap("EmployeeMap")
+    @ResultMap("EmployeeMap") //DB조회결과를
     List<Employee> getByCompanyId(@Param("companyId") int companyId);
 }
