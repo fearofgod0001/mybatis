@@ -11,13 +11,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyController {
     private final CompanyMapper companyMapper;
+    private final CompanyService companyService;
     @PostMapping("")
     public int post(@RequestBody Company company){
         return companyMapper.insert(company);
     }
     @GetMapping("")
     public List<Company> getAll(){
-        return companyMapper.getAll();
+        return companyService.getAll();
     }
 
 }
